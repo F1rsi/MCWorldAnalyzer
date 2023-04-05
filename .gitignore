@@ -1,3 +1,8 @@
+result
+world
+tmp.py
+result.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
