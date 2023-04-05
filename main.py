@@ -8,7 +8,10 @@ def main(path_to_world: str):
     path_to_regions = concatenate_paths(path_to_world, 'region')
     region_file_names = get_all_file_names(path_to_regions)
 
-    for region_file_name in region_file_names:
+    used_region_file_names = open('used_region_file_names.txt').read().split('\n')
+
+    unused_region_file_names = get_non_recurring_items(region_file_names, used_region_file_names)
+    for region_file_name in unused_region_file_names:
         log_info(f'Start new region: "{region_file_name}"', end='\n')
 
         block_acacia_door = 0                    # Генерация
@@ -1220,6 +1223,10 @@ def main(path_to_world: str):
             f.write(f'{block_azure_bluet=}\n')
 
     print()
+    log_info('Save used region files!\n')
+    used_region_file_names.append(region_file_name)
+    with open('used_region_file_names.txt', 'w') as f:
+        f.write('\n'.join(used_region_file_names))
 
 
 if __name__ == '__main__':
