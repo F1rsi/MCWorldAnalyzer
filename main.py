@@ -91,6 +91,7 @@ def main(path_to_world: str):
         block_gray_wool = 0                      # Генерация
         block_green_wool = 0                     # Генерация
         block_ice = 0                            # Генерация
+        block_infested_chiseled_stone_bricks = 0 # Генерация
         block_infested_cobblestone = 0           # Генерация
         block_infested_cracked_stone_bricks = 0  # Генерация
         block_infested_mossy_stone_bricks = 0    # Генерация
@@ -702,9 +703,8 @@ def main(path_to_world: str):
                                 block_infested_mossy_stone_bricks += 1
                             elif b_data == 4:
                                 block_infested_cracked_stone_bricks += 1
-                            else:
-                                log_error(f'Invalid b_data: {b_id=}; {b_data=}')
-                                exit()
+                            elif b_data == 5:
+                                block_infested_chiseled_stone_bricks += 1
 
                         elif b_id == 98:
                             if b_data == 0:
@@ -1110,6 +1110,7 @@ def main(path_to_world: str):
             f.write(f'{block_gray_wool=}\n')
             f.write(f'{block_green_wool=}\n')
             f.write(f'{block_ice=}\n')
+            f.write(f'{block_infested_chiseled_stone_bricks=}\n')
             f.write(f'{block_infested_cobblestone=}\n')
             f.write(f'{block_infested_cracked_stone_bricks=}\n')
             f.write(f'{block_infested_mossy_stone_bricks=}\n')
