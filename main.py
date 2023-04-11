@@ -211,6 +211,7 @@ def main(args):
         block_snow = 0
         block_snow_block = 0
         block_spawner = 0
+        block_spruce_door = 0
         block_spruce_fence = 0
         block_spruce_leaves = 0
         block_spruce_log = 0
@@ -218,6 +219,7 @@ def main(args):
         block_spruce_slab = 0
         block_spruce_stairs = 0
         block_stone = 0
+        block_stone_brick_slab = 0
         block_stone_brick_stairs = 0
         block_stone_bricks = 0
         block_stone_button = 0
@@ -566,6 +568,8 @@ def main(args):
                                 block_wooden_slab += 1
                             elif b_data == 3:
                                 block_cobblestone_slab += 1
+                            elif b_data == 5:
+                                block_stone_brick_slab += 1
                             elif b_data == 8:
                                 block_smooth_stone_slab += 1
                             elif b_data == 9:
@@ -1033,6 +1037,9 @@ def main(args):
                         elif b_id == 192:
                             block_acacia_fence += 1
 
+                        elif b_id == 193:
+                            block_spruce_door += 1
+
                         elif b_id == 196:
                             block_acacia_door += 1
 
@@ -1242,6 +1249,7 @@ def main(args):
             f.write(f'{block_snow=}\n')
             f.write(f'{block_snow_block=}\n')
             f.write(f'{block_spawner=}\n')
+            f.write(f'{block_spruce_door=}\n')
             f.write(f'{block_spruce_fence=}\n')
             f.write(f'{block_spruce_leaves=}\n')
             f.write(f'{block_spruce_log=}\n')
@@ -1249,6 +1257,7 @@ def main(args):
             f.write(f'{block_spruce_slab=}\n')
             f.write(f'{block_spruce_stairs=}\n')
             f.write(f'{block_stone=}\n')
+            f.write(f'{block_stone_brick_slab=}\n')
             f.write(f'{block_stone_brick_stairs=}\n')
             f.write(f'{block_stone_bricks=}\n')
             f.write(f'{block_stone_button=}\n')
