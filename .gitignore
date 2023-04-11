@@ -1,6 +1,4 @@
-result
-tmp.py
-result.json
+.result
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

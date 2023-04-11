@@ -1,14 +1,22 @@
 import sys
+import argparse
 
 from utils import *
 import anvil
 
 
-def main(path_to_world: str):
-    path_to_regions = concatenate_paths(path_to_world, 'region')
+def main(args):
+    path_to_regions = concatenate_paths(args.input, 'region')
     region_file_names = get_all_file_names(path_to_regions)
+    
+    OUTPUT_FOLDER = args.output
+    OUTPUT_USED_REGION_FILE_NAMES = concatenate_paths(OUTPUT_FOLDER, 'used_region_file_names.txt')
 
-    used_region_file_names = open('used_region_file_names.txt').read().split('\n')
+    if file_is_exists(OUTPUT_USED_REGION_FILE_NAMES):
+        used_region_file_names = open(concatenate_paths(OUTPUT_FOLDER, 'used_region_file_names.txt')).read().split('\n')
+        open(OUTPUT_USED_REGION_FILE_NAMES, 'w').close()
+    else:
+        used_region_file_names = []
 
     unused_region_file_names = get_non_recurring_items(region_file_names, used_region_file_names)
     for region_file_name in unused_region_file_names:
@@ -1032,8 +1040,7 @@ def main(path_to_world: str):
 
             log_info(f'Chunk at {ch_x}; {ch_z} finished!', end='')
 
-        with open(region_path, 'w') as f: pass
-        with open(concatenate_paths('result', region_file_name), 'w') as f:
+        with open(concatenate_paths(OUTPUT_FOLDER, region_file_name), 'w') as f:
             f.write(f'{block_acacia_door=}\n')
             f.write(f'{block_acacia_fence=}\n')
             f.write(f'{block_acacia_leaves=}\n')
@@ -1220,15 +1227,27 @@ def main(path_to_world: str):
             f.write(f'{block_wooden_slab=}\n')
             f.write(f'{block_yellow_terracotta=}\n')
             f.write(f'{block_yellow_wool=}\n')
-            f.write(f'{block_azure_bluet=}\n')
+            f.write(f'{block_azure_bluet=}')
+
+        log_info('Save used region files!     \n')
+        used_region_file_names.append(region_file_name)
+        with open(concatenate_paths(OUTPUT_FOLDER, 'used_region_file_names.txt'), 'a') as f:
+            f.write(region_file_name)
+            f.write('\n')
 
     print()
-    log_info('Save used region files!\n')
-    used_region_file_names.append(region_file_name)
-    with open('used_region_file_names.txt', 'w') as f:
-        f.write('\n'.join(used_region_file_names))
 
 
 if __name__ == '__main__':
-    path_to_world = sys.argv[1]
-    main(path_to_world)
+    parser = argparse.ArgumentParser(description='This is description.')
+    parser.add_argument(
+        '-o', '--output', default='result', type=str, help='Output folder for result.',
+        required=False
+    )
+    parser.add_argument(
+        '-i', '--input', type=str, help='Input folder for minecraft world aka "saves/my_world".',
+        required=True
+    )
+    args = parser.parse_args()
+    main(args)
+
