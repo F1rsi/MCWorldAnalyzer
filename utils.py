@@ -7,10 +7,6 @@ import errors
 def get_non_recurring_items(l1: list, l2: list) -> list:
     return [i for i in l1 if i not in l2]
 
-#FIXME
-def save_to_json(data: dict, path: str) -> None:
-    json.dump(data, open(path))
-
 
 def log_warn(msg: str, end='\n') -> None:
     print(f'\n[WARN]: {msg}', end=end)
