@@ -130,17 +130,24 @@ class Chunk:
 
         :rtype: :class:`anvil.Block`
         """
+        '''Useless for Minecraft-World-Analyzer.
         if x < 0 or x > 15:
             raise OutOfBoundsCoordinates(f'X ({x!r}) must be in range of 0 to 15')
         if z < 0 or z > 15:
             raise OutOfBoundsCoordinates(f'Z ({z!r}) must be in range of 0 to 15')
         if y < 0 or y > 255:
             raise OutOfBoundsCoordinates(f'Y ({y!r}) must be in range of 0 to 255')
+        '''
 
+        '''Useless for Minecraft-World-Analyzer.
         if section is None:
             section = self.get_section(y // 16)
             # global Y to section Y
             y %= 16
+        '''
+
+        section = self.get_section(y // 16)
+        y %= 16
 
         if self.version is None or self.version < _VERSION_17w47a:
             # Explained in depth here https://minecraft.gamepedia.com/index.php?title=Chunk_format&oldid=1153403#Block_format
