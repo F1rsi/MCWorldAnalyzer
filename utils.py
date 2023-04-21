@@ -8,16 +8,16 @@ def get_non_recurring_items(l1: list, l2: list) -> list:
     return [i for i in l1 if i not in l2]
 
 
-def log_warn(msg: str, end='\n') -> None:
-    print(f'\n[WARN]: {msg}', end=end)
+def log_warn(msg: str) -> None:
+    print(f'\n[WARN]: {msg}')
 
 
-def log_error(msg: str, end='\n') -> None:
-    print(f'[ERROR]: {msg}', end=end)
+def log_error(msg: str) -> None:
+    print(f'[ERROR]: {msg}')
 
 
-def log_info(msg: str, end='') -> None:
-    print(f'\r[INFO]: {msg}', end=end)
+def log_info(msg: str) -> None:
+    print(f'\r[INFO]: {msg}', end='')
 
 
 def read_file(path: str, mode: str):

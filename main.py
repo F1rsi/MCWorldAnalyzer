@@ -28,7 +28,7 @@ def main(args):
 
     unused_region_file_names = get_non_recurring_items(region_file_names, used_region_file_names)
     for region_file_name in unused_region_file_names:
-        log_info(f'Start new region: "{region_file_name}"', end='\n')
+        log_info(f'Start new region: "{region_file_name}"\n')
 
         block_acacia_door = 0
         block_acacia_fence = 0
@@ -258,814 +258,814 @@ def main(args):
         region_path = concatenate_paths(path_to_regions, region_file_name)
         Region = anvil.region.Region(read_file(region_path, 'rb'))
 
-        for (ch_x, ch_z) in get_all_chunk_coords_from_region(region_path):
-            Chunk = Region.get_chunk(ch_x, ch_z)
+        for (chunk_x, chunk_z) in get_all_chunk_coords_from_region(region_path):
+            Chunk = Region.get_chunk(chunk_x, chunk_z)
 
-            for b_y in CHUNK_HEIGHT_RANGE:
-                for b_x in CHUNK_WIDTH_RANGE:
-                    for b_z in CHUNK_LENGTH_RANGE:
+            for block_y in CHUNK_HEIGHT_RANGE:
+                for block_x in CHUNK_WIDTH_RANGE:
+                    for block_z in CHUNK_LENGTH_RANGE:
 
-                        b = Chunk.get_block(b_x, b_y, b_z)
+                        block = Chunk.get_block(block_x, block_y, block_z)
 
-                        b_id = b.id
-                        b_data = b.data
+                        block_id = block.id
+                        block_data = block.data
 
-                        if b_id == 0:
+                        if block_id == 0:
                             block_air += 1
                         
-                        elif b_id == 1:
-                            if b_data == 0:
+                        elif block_id == 1:
+                            if block_data == 0:
                                 block_stone += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_granite += 1
-                            elif b_data == 3:
+                            elif block_data == 3:
                                 block_diorite += 1
-                            elif b_data == 5:
+                            elif block_data == 5:
                                 block_andesite += 1
-                            elif b_data == 6:
+                            elif block_data == 6:
                                 block_polished_andesite += 1
                             else:
-                                log_error(f'Invalid b_data: {b_id=}; {b_data=}')
+                                log_error(f'Invalid block_data: {block_id=}; {block_data=}')
                                 exit()
 
-                        elif b_id == 2:
+                        elif block_id == 2:
                             block_grass_block += 1
 
-                        elif b_id == 3:
-                            if b_data == 0:
+                        elif block_id == 3:
+                            if block_data == 0:
                                 block_dirt += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_coarse_dirt += 1
-                            elif b_data == 2:
+                            elif block_data == 2:
                                 block_podzol += 1
 
-                        elif b_id == 4:
+                        elif block_id == 4:
                             block_cobblestone += 1
 
-                        elif b_id == 5:
-                            if b_data == 0:
+                        elif block_id == 5:
+                            if block_data == 0:
                                 block_oak_planks += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_spruce_planks += 1
-                            elif b_data == 2:
+                            elif block_data == 2:
                                 block_birch_planks += 1
-                            elif b_data == 4:
+                            elif block_data == 4:
                                 block_acacia_planks += 1
-                            elif b_data == 5:
+                            elif block_data == 5:
                                 block_dark_oak_planks += 1
                             else:
-                                log_error(f'Invalid b_data: {b_id=}; {b_data=}')
+                                log_error(f'Invalid block_data: {block_id=}; {block_data=}')
                                 exit()
 
-                        elif b_id == 7:
+                        elif block_id == 7:
                             block_bedrock += 1
 
-                        elif b_id == 8:
+                        elif block_id == 8:
                             block_water += 1
 
-                        elif b_id == 9:
+                        elif block_id == 9:
                             block_water += 1
 
-                        elif b_id == 10:
+                        elif block_id == 10:
                             block_lava += 1
 
-                        elif b_id == 11:
+                        elif block_id == 11:
                             block_lava += 1
 
-                        elif b_id == 12:
-                            if b_data == 0:
+                        elif block_id == 12:
+                            if block_data == 0:
                                 block_sand += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_red_sand += 1
 
-                        elif b_id == 13:
+                        elif block_id == 13:
                             block_gravel += 1
 
-                        elif b_id == 14:
+                        elif block_id == 14:
                             block_gold_ore += 1
 
-                        elif b_id == 15:
+                        elif block_id == 15:
                             block_iron_ore += 1
 
-                        elif b_id == 16:
+                        elif block_id == 16:
                             block_coal_ore += 1
 
-                        elif b_id == 17:
-                            if b_data == 0:
+                        elif block_id == 17:
+                            if block_data == 0:
                                 block_oak_log += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_spruce_log += 1
-                            elif b_data == 2:
+                            elif block_data == 2:
                                 block_birch_log += 1
-                            elif b_data == 3:
+                            elif block_data == 3:
                                 block_jungle_log += 1
-                            elif b_data == 4:
+                            elif block_data == 4:
                                 block_oak_log += 1
-                            elif b_data == 5:
+                            elif block_data == 5:
                                 block_spruce_log += 1
-                            elif b_data == 6:
+                            elif block_data == 6:
                                 block_birch_log += 1
-                            elif b_data == 7:
+                            elif block_data == 7:
                                 block_jungle_log += 1
-                            elif b_data == 8:
+                            elif block_data == 8:
                                 block_oak_log += 1
-                            elif b_data == 9:
+                            elif block_data == 9:
                                 block_spruce_log += 1
-                            elif b_data == 10:
+                            elif block_data == 10:
                                 block_birch_log += 1
-                            elif b_data == 11:
+                            elif block_data == 11:
                                 block_jungle_log += 1
-                            elif b_data == 12:
+                            elif block_data == 12:
                                 block_oak_log += 1
-                            elif b_data == 13:
+                            elif block_data == 13:
                                 block_spruce_log += 1
-                            elif b_data == 14:
+                            elif block_data == 14:
                                 block_birch_log += 1
-                            elif b_data == 15:
+                            elif block_data == 15:
                                 block_jungle_log += 1
 
-                        elif b_id == 18:
-                            if b_data == 0:
+                        elif block_id == 18:
+                            if block_data == 0:
                                 block_oak_leaves += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_spruce_leaves += 1
-                            elif b_data == 2:
+                            elif block_data == 2:
                                 block_birch_leaves += 1
-                            elif b_data == 3:
+                            elif block_data == 3:
                                 block_jungle_leaves += 1
-                            elif b_data == 4:
+                            elif block_data == 4:
                                 block_oak_leaves += 1
-                            elif b_data == 5:
+                            elif block_data == 5:
                                 block_spruce_leaves += 1
-                            elif b_data == 6:
+                            elif block_data == 6:
                                 block_birch_leaves += 1
-                            elif b_data == 7:
+                            elif block_data == 7:
                                 block_jungle_leaves += 1
-                            elif b_data == 8:
+                            elif block_data == 8:
                                 block_oak_leaves += 1
-                            elif b_data == 9:
+                            elif block_data == 9:
                                 block_spruce_leaves += 1
-                            elif b_data == 10:
+                            elif block_data == 10:
                                 block_birch_leaves += 1
-                            elif b_data == 11:
+                            elif block_data == 11:
                                 block_jungle_leaves += 1
-                            elif b_data == 12:
+                            elif block_data == 12:
                                 block_oak_leaves += 1
-                            elif b_data == 13:
+                            elif block_data == 13:
                                 block_spruce_leaves += 1
-                            elif b_data == 14:
+                            elif block_data == 14:
                                 block_birch_leaves += 1
-                            elif b_data == 15:
+                            elif block_data == 15:
                                 block_jungle_leaves += 1
 
-                        elif b_id == 19:
-                            if b_data == 1:
+                        elif block_id == 19:
+                            if block_data == 1:
                                 block_wet_sponge += 1
                             else:
-                                log_error(f'Invalid b_data: {b_id=}; {b_data=}')
+                                log_error(f'Invalid block_data: {block_id=}; {block_data=}')
                                 exit()
 
-                        elif b_id == 20:
+                        elif block_id == 20:
                             block_glass += 1
 
-                        elif b_id == 21:
+                        elif block_id == 21:
                             block_lapis_ore += 1
 
-                        elif b_id == 22:
+                        elif block_id == 22:
                             block_lapis_block += 1
 
-                        elif b_id == 23:
+                        elif block_id == 23:
                             block_dispenser += 1
 
-                        elif b_id == 24:
-                            if b_data == 0:
+                        elif block_id == 24:
+                            if block_data == 0:
                                 block_sandstone += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_chiseled_sandstone += 1
-                            elif b_data == 2:
+                            elif block_data == 2:
                                 block_cut_sandstone += 1
                             else:
-                                log_error(f'Invalid b_data: {b_id=}; {b_data=}')
+                                log_error(f'Invalid block_data: {block_id=}; {block_data=}')
                                 exit()
 
-                        elif b_id == 26:
+                        elif block_id == 26:
                             block_bed += 1
 
-                        elif b_id == 27:
+                        elif block_id == 27:
                             block_powered_rail += 1
 
-                        elif b_id == 29:
+                        elif block_id == 29:
                             block_sticky_piston += 1
 
-                        elif b_id == 30:
+                        elif block_id == 30:
                             block_cobweb += 1
 
-                        elif b_id == 31:
-                            if b_data == 0:
+                        elif block_id == 31:
+                            if block_data == 0:
                                 block_dead_shrub += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_grass += 1
-                            elif b_data == 2:
+                            elif block_data == 2:
                                 block_fern += 1
 
-                        elif b_id == 32:
+                        elif block_id == 32:
                             block_dead_bush += 1
 
-                        elif b_id == 35:
-                            if b_data == 0:
+                        elif block_id == 35:
+                            if block_data == 0:
                                 block_white_wool += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_orange_wool += 1
-                            elif b_data == 3:
+                            elif block_data == 3:
                                 block_light_blue_wool += 1
-                            elif b_data == 4:
+                            elif block_data == 4:
                                 block_yellow_wool += 1
-                            elif b_data == 5:
+                            elif block_data == 5:
                                 block_lime_wool += 1
-                            elif b_data == 7:
+                            elif block_data == 7:
                                 block_gray_wool += 1
-                            elif b_data == 8:
+                            elif block_data == 8:
                                 block_light_gray_wool += 1
-                            elif b_data == 9:
+                            elif block_data == 9:
                                 block_cyan_wool += 1
-                            elif b_data == 11:
+                            elif block_data == 11:
                                 block_blue_wool += 1
-                            elif b_data == 12:
+                            elif block_data == 12:
                                 block_brown_wool += 1
-                            elif b_data == 13:
+                            elif block_data == 13:
                                 block_green_wool += 1
-                            elif b_data == 14:
+                            elif block_data == 14:
                                 block_red_wool += 1
-                            elif b_data == 15:
+                            elif block_data == 15:
                                 block_black_wool += 1
                             else:
-                                log_error(f'Invalid b_data: {b_id=}; {b_data=}')
+                                log_error(f'Invalid block_data: {block_id=}; {block_data=}')
                                 exit()
 
-                        elif b_id == 37:
+                        elif block_id == 37:
                             block_dandelion += 1
 
-                        elif b_id == 38:
-                            if b_data == 0:
+                        elif block_id == 38:
+                            if block_data == 0:
                                 block_poppy += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_blue_orchid += 1
-                            elif b_data == 2:
+                            elif block_data == 2:
                                 block_allium += 1
-                            elif b_data == 3:
+                            elif block_data == 3:
                                 block_azure_bluet += 1
-                            elif b_data == 4:
+                            elif block_data == 4:
                                 block_red_tulip += 1
-                            elif b_data == 5:
+                            elif block_data == 5:
                                 block_orange_tulip += 1
-                            elif b_data == 6:
+                            elif block_data == 6:
                                 block_white_tulip += 1
-                            elif b_data == 7:
+                            elif block_data == 7:
                                 block_pink_tulip += 1
-                            elif b_data == 8:
+                            elif block_data == 8:
                                 block_oxeye_daise += 1
 
-                        elif b_id == 39:
+                        elif block_id == 39:
                             block_brown_mushroom += 1
                         
-                        elif b_id == 40:
+                        elif block_id == 40:
                             block_red_mushroom += 1
 
-                        elif b_id == 41:
+                        elif block_id == 41:
                             block_gold_block += 1
 
-                        elif b_id == 42:
+                        elif block_id == 42:
                             block_iron_block += 1
 
-                        elif b_id == 43:
-                            if b_data == 0:
+                        elif block_id == 43:
+                            if block_data == 0:
                                 block_smooth_stone_slab += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_sandstone_slab += 1
-                            elif b_data == 2:
+                            elif block_data == 2:
                                 block_petrified_oak_slab += 1
-                            elif b_data == 3:
+                            elif block_data == 3:
                                 block_cobblestone_slab += 1
-                            elif b_data == 4:
+                            elif block_data == 4:
                                 block_brick_slab += 1
-                            elif b_data == 6:
+                            elif block_data == 6:
                                 block_nether_brick_slab += 1
-                            elif b_data == 7:
+                            elif block_data == 7:
                                 block_quartz_slab += 1
-                            elif b_data == 8:
+                            elif block_data == 8:
                                 block_smooth_stone += 1
-                            elif b_data == 9:
+                            elif block_data == 9:
                                 block_smooth_sandstone += 1
-                            elif b_data == 11:
+                            elif block_data == 11:
                                 block_cobblestone_slab += 1
-                            elif b_data == 12:
+                            elif block_data == 12:
                                 block_brick_slab += 1
-                            elif b_data == 14:
+                            elif block_data == 14:
                                 block_nether_brick_slab += 1
-                            elif b_data == 15:
+                            elif block_data == 15:
                                 block_smooth_quartz += 1
                             else:
-                                log_error(f'Invalid b_data: {b_id=}; {b_data=}')
+                                log_error(f'Invalid block_data: {block_id=}; {block_data=}')
                                 exit()
 
-                        elif b_id == 44:
-                            if b_data == 0:
+                        elif block_id == 44:
+                            if block_data == 0:
                                 block_smooth_stone_slab += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_sandstone_slab += 1
-                            elif b_data == 2:
+                            elif block_data == 2:
                                 block_wooden_slab += 1
-                            elif b_data == 3:
+                            elif block_data == 3:
                                 block_cobblestone_slab += 1
-                            elif b_data == 5:
+                            elif block_data == 5:
                                 block_stone_brick_slab += 1
-                            elif b_data == 8:
+                            elif block_data == 8:
                                 block_smooth_stone_slab += 1
-                            elif b_data == 9:
+                            elif block_data == 9:
                                 block_sandstone_slab += 1
-                            elif b_data == 10:
+                            elif block_data == 10:
                                 block_wooden_slab += 1
-                            elif b_data == 11:
+                            elif block_data == 11:
                                 block_cobblestone_slab += 1
                             else:
-                                log_error(f'Invalid b_data: {b_id=}; {b_data=}')
+                                log_error(f'Invalid block_data: {block_id=}; {block_data=}')
                                 exit()
 
-                        elif b_id == 46:
+                        elif block_id == 46:
                             block_tnt += 1
 
-                        elif b_id == 47:
+                        elif block_id == 47:
                             block_bookshelf += 1
 
-                        elif b_id == 48:
+                        elif block_id == 48:
                             block_mossy_cobblestone += 1
 
-                        elif b_id == 49:
+                        elif block_id == 49:
                             block_obsidian += 1
 
-                        elif b_id == 50:
+                        elif block_id == 50:
                             block_torch += 1
 
-                        elif b_id == 52:
+                        elif block_id == 52:
                             block_spawner += 1
 
-                        elif b_id == 53:
+                        elif block_id == 53:
                             block_oak_stairs += 1
 
-                        elif b_id == 54:
+                        elif block_id == 54:
                             block_chest += 1
 
-                        elif b_id == 55:
+                        elif block_id == 55:
                             block_redstone_wire += 1
 
-                        elif b_id == 56:
+                        elif block_id == 56:
                             block_diamond_ore += 1
 
-                        elif b_id == 57:
+                        elif block_id == 57:
                             block_diamond_block += 1
 
-                        elif b_id == 58:
+                        elif block_id == 58:
                             block_crafting_table += 1
 
-                        elif b_id == 59:
+                        elif block_id == 59:
                             block_wheat += 1
 
-                        elif b_id == 60:
+                        elif block_id == 60:
                             block_farmland += 1
 
-                        elif b_id == 61:
+                        elif block_id == 61:
                             block_furnace += 1
 
-                        elif b_id == 62:
+                        elif block_id == 62:
                             block_furnace += 1
 
-                        elif b_id == 63:
+                        elif block_id == 63:
                             block_oak_sign += 1
 
-                        elif b_id == 64:
+                        elif block_id == 64:
                             block_oak_door += 1
 
-                        elif b_id == 65:
+                        elif block_id == 65:
                             block_ladder += 1
 
-                        elif b_id == 66:
+                        elif block_id == 66:
                             block_rail += 1
 
-                        elif b_id == 67:
+                        elif block_id == 67:
                             block_cobblestone_stairs += 1
 
-                        elif b_id == 68: # Oak wall sign <=> oak sign
+                        elif block_id == 68: # Oak wall sign <=> oak sign
                             block_oak_sign += 1
 
-                        elif b_id == 69:
+                        elif block_id == 69:
                             block_lever += 1
 
-                        elif b_id == 70:
+                        elif block_id == 70:
                             block_stone_pressure_plate += 1
 
-                        elif b_id == 71:
+                        elif block_id == 71:
                             block_iron_door += 1
 
-                        elif b_id == 72:
+                        elif block_id == 72:
                             block_oak_pressure_plate += 1
 
-                        elif b_id == 73:
+                        elif block_id == 73:
                             block_redstone_ore += 1
 
-                        elif b_id == 74:
+                        elif block_id == 74:
                             block_redstone_ore += 1
 
-                        elif b_id == 75: # Redstone wall torch <=> redstone torch
+                        elif block_id == 75: # Redstone wall torch <=> redstone torch
                             block_redstone_torch += 1
 
-                        elif b_id == 76:
+                        elif block_id == 76:
                             block_redstone_torch += 1
 
-                        elif b_id == 77:
+                        elif block_id == 77:
                             block_stone_button += 1
 
-                        elif b_id == 78:
+                        elif block_id == 78:
                             block_snow += 1
 
-                        elif b_id == 79:
+                        elif block_id == 79:
                             block_ice += 1
 
-                        elif b_id == 80:
+                        elif block_id == 80:
                             block_snow_block += 1
 
-                        elif b_id == 81:
+                        elif block_id == 81:
                             block_cactus += 1
 
-                        elif b_id == 82:
+                        elif block_id == 82:
                             block_clay += 1
 
-                        elif b_id == 83:
+                        elif block_id == 83:
                             block_sugar_cane += 1
 
-                        elif b_id == 84:
+                        elif block_id == 84:
                             block_jukebox += 1
 
-                        elif b_id == 85:
+                        elif block_id == 85:
                             block_oak_fence += 1
 
-                        elif b_id == 86:
+                        elif block_id == 86:
                             block_carved_pumpkin += 1
 
-                        elif b_id == 93:
+                        elif block_id == 93:
                             block_repeater += 1
 
-                        elif b_id == 94:
+                        elif block_id == 94:
                             block_repeater += 1
 
-                        elif b_id == 96:
+                        elif block_id == 96:
                             block_oak_trapdoor += 1
 
-                        elif b_id == 97:
-                            if b_data == 0:
+                        elif block_id == 97:
+                            if block_data == 0:
                                 block_infested_stone += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_infested_cobblestone += 1
-                            elif b_data == 2:
+                            elif block_data == 2:
                                 block_infested_stone_bricks += 1
-                            elif b_data == 3:
+                            elif block_data == 3:
                                 block_infested_mossy_stone_bricks += 1
-                            elif b_data == 4:
+                            elif block_data == 4:
                                 block_infested_cracked_stone_bricks += 1
-                            elif b_data == 5:
+                            elif block_data == 5:
                                 block_infested_chiseled_stone_bricks += 1
 
-                        elif b_id == 98:
-                            if b_data == 0:
+                        elif block_id == 98:
+                            if block_data == 0:
                                 block_stone_bricks += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_mossy_stone_bricks += 1
-                            elif b_data == 2:
+                            elif block_data == 2:
                                 block_cracked_stone_bricks += 1
-                            elif b_data == 3:
+                            elif block_data == 3:
                                 block_chiseled_stone_bricks += 1
                             #else:
-                            #    log_error(f'Invalid b_data: {b_id=}; {b_data=}')
+                            #    log_error(f'Invalid block_data: {block_id=}; {block_data=}')
                             #    exit()
 
-                        elif b_id == 99:
+                        elif block_id == 99:
                             block_brown_mushroom_block += 1
 
-                        elif b_id == 100:
+                        elif block_id == 100:
                             block_red_mushroom_block += 1
 
-                        elif b_id == 101:
+                        elif block_id == 101:
                             block_iron_bars += 1
 
-                        elif b_id == 102:
+                        elif block_id == 102:
                             block_glass_pane += 1
 
-                        elif b_id == 103:
+                        elif block_id == 103:
                             block_melon += 1
 
-                        elif b_id == 106:
+                        elif block_id == 106:
                             block_vine += 1
 
-                        elif b_id == 109:
+                        elif block_id == 109:
                             block_stone_brick_stairs += 1
 
-                        elif b_id == 110:
+                        elif block_id == 110:
                             block_mycelium += 1
 
-                        elif b_id == 111:
+                        elif block_id == 111:
                             block_lily_pad += 1
 
-                        elif b_id == 117:
+                        elif block_id == 117:
                             block_brewing_stand += 1
 
-                        elif b_id == 118:
+                        elif block_id == 118:
                             block_cauldron += 1
 
-                        elif b_id == 120:
+                        elif block_id == 120:
                             block_end_portal_frame += 1
 
-                        elif b_id == 125:
-                            if b_data == 0:
+                        elif block_id == 125:
+                            if block_data == 0:
                                 block_oak_slab += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_spruce_slab += 1
-                            elif b_data == 2:
+                            elif block_data == 2:
                                 block_birch_slab += 1
                             else:
-                                log_error(f'Invalid b_data: {b_id=}; {b_data=}')
+                                log_error(f'Invalid block_data: {block_id=}; {block_data=}')
                                 exit()
 
-                        elif b_id == 126:
-                            if b_data == 9:
+                        elif block_id == 126:
+                            if block_data == 9:
                                 block_spruce_slab += 1
                             else:
-                                log_error(f'Invalid b_data: {b_id=}; {b_data=}')
+                                log_error(f'Invalid block_data: {block_id=}; {block_data=}')
                                 exit()
 
-                        elif b_id == 127:
+                        elif block_id == 127:
                             block_cocoa += 1
 
-                        elif b_id == 128:
+                        elif block_id == 128:
                             block_sandstone_stairs += 1
 
-                        elif b_id == 129:
+                        elif block_id == 129:
                             block_emerald_ore += 1
 
-                        elif b_id == 131:
+                        elif block_id == 131:
                             block_tripwire_hook += 1
 
-                        elif b_id == 132:
+                        elif block_id == 132:
                             block_tripwire += 1
 
-                        elif b_id == 134:
+                        elif block_id == 134:
                             block_spruce_stairs += 1
 
-                        elif b_id == 135:
+                        elif block_id == 135:
                             block_birch_stairs += 1
 
-                        elif b_id == 139:
-                            if b_data == 0:
+                        elif block_id == 139:
+                            if block_data == 0:
                                 block_cobblestone_wall += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_mossy_cobblestone_wall += 1
 
-                        elif b_id == 140:
-                            if b_data == 0:
+                        elif block_id == 140:
+                            if block_data == 0:
                                 block_flower_pot += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_potted_poppy += 1
-                            elif b_data == 2:
+                            elif block_data == 2:
                                 block_potted_dandelion += 1
-                            elif b_data == 3:
+                            elif block_data == 3:
                                 block_potted_oak_sapling += 1
-                            elif b_data == 4:
+                            elif block_data == 4:
                                 block_potted_spruce_sapling += 1
-                            elif b_data == 5:
+                            elif block_data == 5:
                                 block_potted_birch_sapling += 1
-                            elif b_data == 6:
+                            elif block_data == 6:
                                 block_potted_jungle_sapling += 1
-                            elif b_data == 7:
+                            elif block_data == 7:
                                 block_potted_red_mushroom += 1
-                            elif b_data == 8:
+                            elif block_data == 8:
                                 block_potted_brown_mushroom += 1
-                            elif b_data == 9:
+                            elif block_data == 9:
                                 block_potted_cactus += 1
-                            elif b_data == 10:
+                            elif block_data == 10:
                                 block_potted_dead_bush += 1
-                            elif b_data == 11:
+                            elif block_data == 11:
                                 block_potted_fern += 1
-                            elif b_data == 12:
+                            elif block_data == 12:
                                 block_potted_acacia_sapling += 1
-                            elif b_data == 13:
+                            elif block_data == 13:
                                 block_potted_dark_oak_sapling += 1
-                            elif b_data == 14:
+                            elif block_data == 14:
                                 block_flower_pot += 1
-                            elif b_data == 15:
+                            elif block_data == 15:
                                 block_flower_pot += 1
 
-                        elif b_id == 141:
+                        elif block_id == 141:
                             block_carrots += 1
 
-                        elif b_id == 142:
+                        elif block_id == 142:
                             block_potatoes += 1
 
-                        elif b_id == 146:
+                        elif block_id == 146:
                             block_trapped_chest += 1
 
-                        elif b_id == 159:
-                            if b_data == 0:
+                        elif block_id == 159:
+                            if block_data == 0:
                                 block_white_terracotta += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_orange_terracotta += 1
-                            elif b_data == 4:
+                            elif block_data == 4:
                                 block_yellow_terracotta += 1
-                            elif b_data == 8:
+                            elif block_data == 8:
                                 block_light_gray_terracotta += 1
-                            elif b_data == 11:
+                            elif block_data == 11:
                                 block_blue_terracotta += 1
-                            elif b_data == 12:
+                            elif block_data == 12:
                                 block_brown_terracotta += 1
-                            elif b_data == 14:
+                            elif block_data == 14:
                                 block_red_terracotta += 1
                             else:
-                                log_error(f'Invalid b_data: {b_id=}; {b_data=}')
+                                log_error(f'Invalid block_data: {block_id=}; {block_data=}')
                                 exit()
 
-                        elif b_id == 161:
-                            if b_data == 0:
+                        elif block_id == 161:
+                            if block_data == 0:
                                 block_acacia_leaves += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_dark_oak_leaves += 1
-                            elif b_data == 4:
+                            elif block_data == 4:
                                 block_acacia_leaves += 1
-                            elif b_data == 5:
+                            elif block_data == 5:
                                 block_dark_oak_leaves += 1
-                            elif b_data == 8:
+                            elif block_data == 8:
                                 block_acacia_leaves += 1
-                            elif b_data == 9:
+                            elif block_data == 9:
                                 block_dark_oak_leaves += 1
-                            elif b_data == 12:
+                            elif block_data == 12:
                                 block_acacia_leaves += 1
-                            elif b_data == 13:
+                            elif block_data == 13:
                                 block_dark_oak_leaves += 1
 
-                        elif b_id == 162:
-                            if b_data == 0:
+                        elif block_id == 162:
+                            if block_data == 0:
                                 block_acacia_log += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_dark_oak_log += 1
-                            elif b_data == 4:
+                            elif block_data == 4:
                                 block_acacia_log += 1
-                            elif b_data == 5:
+                            elif block_data == 5:
                                 block_dark_oak_log += 1
-                            elif b_data == 8:
+                            elif block_data == 8:
                                 block_acacia_log += 1
-                            elif b_data == 9:
+                            elif block_data == 9:
                                 block_dark_oak_log += 1
-                            elif b_data == 12:
+                            elif block_data == 12:
                                 block_acacia_log += 1
-                            elif b_data == 13:
+                            elif block_data == 13:
                                 block_dark_oak_log += 1
 
-                        elif b_id == 163:
+                        elif block_id == 163:
                             block_acacia_stairs += 1
 
-                        elif b_id == 164:
+                        elif block_id == 164:
                             block_dark_oak_stairs += 1
 
-                        elif b_id == 168:
-                            if b_data == 0:
+                        elif block_id == 168:
+                            if block_data == 0:
                                 block_prismarine += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_prismarine_bricks += 1
-                            elif b_data == 2:
+                            elif block_data == 2:
                                 block_dark_prismarine += 1
 
-                        elif b_id == 169:
+                        elif block_id == 169:
                             block_sea_lantern += 1
 
-                        elif b_id == 171:
-                            if b_data == 0:
+                        elif block_id == 171:
+                            if block_data == 0:
                                 block_white_carpet += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_orange_carpet += 1
-                            elif b_data == 2:
+                            elif block_data == 2:
                                 block_magenta_carpet += 1
-                            elif b_data == 3:
+                            elif block_data == 3:
                                 block_light_blue_carpet += 1
-                            elif b_data == 4:
+                            elif block_data == 4:
                                 block_yellow_carpet += 1
-                            elif b_data == 5:
+                            elif block_data == 5:
                                 block_lime_carpet += 1
-                            elif b_data == 6:
+                            elif block_data == 6:
                                 block_pink_carpet += 1
-                            elif b_data == 7:
+                            elif block_data == 7:
                                 block_gray_carpet += 1
-                            elif b_data == 8:
+                            elif block_data == 8:
                                 block_light_gray_carpet += 1
-                            elif b_data == 9:
+                            elif block_data == 9:
                                 block_cyan_carpet += 1
-                            elif b_data == 10:
+                            elif block_data == 10:
                                 block_purple_carpet += 1
-                            elif b_data == 11:
+                            elif block_data == 11:
                                 block_blue_carpet += 1
-                            elif b_data == 12:
+                            elif block_data == 12:
                                 block_brown_carpet += 1
-                            elif b_data == 13:
+                            elif block_data == 13:
                                 block_green_carpet += 1
-                            elif b_data == 14:
+                            elif block_data == 14:
                                 block_red_carpet += 1
-                            elif b_data == 15:
+                            elif block_data == 15:
                                 block_black_carpet += 1
 
-                        elif b_id == 172:
+                        elif block_id == 172:
                             block_terracotta += 1
 
-                        elif b_id == 174:
+                        elif block_id == 174:
                             block_packed_ice += 1
 
-                        elif b_id == 175:
-                            if b_data == 0:
+                        elif block_id == 175:
+                            if block_data == 0:
                                 block_sunflower += 1
-                            elif b_data == 1:
+                            elif block_data == 1:
                                 block_lilac += 1
-                            elif b_data == 2:
+                            elif block_data == 2:
                                 block_tall_grass += 1
-                            elif b_data == 3:
+                            elif block_data == 3:
                                 block_large_fern += 1
-                            elif b_data == 4:
+                            elif block_data == 4:
                                 block_rose_bush += 1
-                            elif b_data == 5:
+                            elif block_data == 5:
                                 block_peony += 1
-                            elif b_data == 8:
+                            elif block_data == 8:
                                 block_sunflower += 1
-                            elif b_data == 9:
+                            elif block_data == 9:
                                 block_lilac += 1
-                            elif b_data == 10:
+                            elif block_data == 10:
                                 block_tall_grass += 1
-                            elif b_data == 11:
+                            elif block_data == 11:
                                 block_large_fern += 1
-                            elif b_data == 12:
+                            elif block_data == 12:
                                 block_rose_bush += 1
-                            elif b_data == 13:
+                            elif block_data == 13:
                                 block_peony += 1
 
-                        elif b_id == 179:
-                            if b_data == 0:
+                        elif block_id == 179:
+                            if block_data == 0:
                                 block_red_sandstone += 1
                             else:
-                                log_error(f'Invalid b_data: {b_id=}; {b_data=}')
+                                log_error(f'Invalid block_data: {block_id=}; {block_data=}')
 
-                        elif b_id == 180:
+                        elif block_id == 180:
                             block_red_sandstone_stairs += 1
 
-                        elif b_id == 181:
-                            if b_data == 0:
+                        elif block_id == 181:
+                            if block_data == 0:
                                 block_red_sandstone += 1
-                            elif b_data == 2:
+                            elif block_data == 2:
                                 block_prismarine += 1
-                            elif b_data == 3:
+                            elif block_data == 3:
                                 block_prismarine_bricks += 1
-                            elif b_data == 4:
+                            elif block_data == 4:
                                 block_dark_prismarine += 1
 
-                        elif b_id == 182:
+                        elif block_id == 182:
                             block_red_sandstone_slab += 1
 
-                        elif b_id == 186:
+                        elif block_id == 186:
                             block_dark_oak_fence_gate += 1
                         
-                        elif b_id == 188:
+                        elif block_id == 188:
                             block_spruce_fence += 1
 
-                        elif b_id == 189:
+                        elif block_id == 189:
                             block_birch_fence += 1
 
-                        elif b_id == 191:
+                        elif block_id == 191:
                             block_dark_oak_fence += 1
 
-                        elif b_id == 192:
+                        elif block_id == 192:
                             block_acacia_fence += 1
 
-                        elif b_id == 193:
+                        elif block_id == 193:
                             block_spruce_door += 1
 
-                        elif b_id == 196:
+                        elif block_id == 196:
                             block_acacia_door += 1
 
-                        elif b_id == 207:
+                        elif block_id == 207:
                             block_beetroots += 1
 
-                        elif b_id == 208:
+                        elif block_id == 208:
                             block_grass_path += 1
 
-                        elif b_id == 216:
+                        elif block_id == 216:
                             block_bone_block += 1
 
                         else:
-                            log_error(f'Invalid block: {b_id=}; {b_data=}\n')
+                            log_error(f'Invalid block: {block_id=}; {block_data=}\n')
                             exit()
 
-            log_info(f'Chunk at {ch_x}; {ch_z} finished!', end='')
+            log_info(f'Chunk at {chunk_x}; {chunk_z} finished!')
 
         with open(concatenate_paths(OUTPUT_FOLDER, region_file_name), 'w') as f:
             f.write(f'{block_acacia_door=}\n')
