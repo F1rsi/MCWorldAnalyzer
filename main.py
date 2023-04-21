@@ -1,5 +1,6 @@
 import sys
 import argparse
+import time
 
 from utils import *
 import anvil
@@ -22,12 +23,14 @@ def main(args):
     OUTPUT_USED_REGION_FILE_NAMES = concatenate_paths(OUTPUT_FOLDER, 'used_region_file_names.txt')
 
     if file_is_exists(OUTPUT_USED_REGION_FILE_NAMES):
-        used_region_file_names = open(OUTPUT_USED_REGION_FILE_NAMES).read().split('\n')
+        used_region_file_names = [item for item in read_file(OUTPUT_USED_REGION_FILE_NAMES, 'r').split('\n') if item]
     else:
         used_region_file_names = []
 
     unused_region_file_names = get_non_recurring_items(region_file_names, used_region_file_names)
     for region_file_name in unused_region_file_names:
+        time_begin = time.perf_counter()
+
         log_info(f'Start new region: "{region_file_name}"\n')
 
         block_acacia_door = 0
@@ -1294,9 +1297,11 @@ def main(args):
             f.write(f'{block_yellow_wool=}')
 
         log_info('Save used region files!     \n')
-        used_region_file_names.append(region_file_name)
-        with open(OUTPUT_USED_REGION_FILE_NAMES, 'w') as f:
-            f.write('\n'.join(used_region_file_names))
+        with open(OUTPUT_USED_REGION_FILE_NAMES, 'a') as f:
+            f.write('\n')
+            f.write(region_file_name)
+
+        log_info(f'Time elapsed {(time.perf_counter() - time_begin) * 1000}ms.\n')
 
     print()
 
