@@ -6,6 +6,15 @@ import anvil
 
 
 def main(args):
+    CHUNK_HEIGHT = 256
+    CHUNK_WIDTH = 16
+    CHUNK_LENGTH = 16
+
+    # For more optimization.
+    CHUNK_HEIGHT_RANGE = range(CHUNK_HEIGHT)
+    CHUNK_WIDTH_RANGE = range(CHUNK_WIDTH)
+    CHUNK_LENGTH_RANGE = range(CHUNK_LENGTH)
+
     path_to_regions = concatenate_paths(args.input, 'region')
     region_file_names = get_all_file_names(path_to_regions)
     
@@ -252,9 +261,9 @@ def main(args):
         for (ch_x, ch_z) in get_all_chunk_coords_from_region(region_path):
             Chunk = Region.get_chunk(ch_x, ch_z)
 
-            for b_y in range(256):
-                for b_x in range(16):
-                    for b_z in range(16):
+            for b_y in CHUNK_HEIGHT_RANGE:
+                for b_x in CHUNK_WIDTH_RANGE:
+                    for b_z in CHUNK_LENGTH_RANGE:
 
                         b = Chunk.get_block(b_x, b_y, b_z)
 
