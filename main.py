@@ -15,6 +15,11 @@ def main(world_path: str, output_file_path: str, dimension: int):
     CHEIGHT = 256
     CWIDTH = 16
     CLENGTH = 16
+
+    range32 = range(32)
+    range_CHEIGHT = range(CHEIGHT)
+    range_CWIDTH = range(CWIDTH)
+    range_CLENGTH = range(CLENGTH)
     
     rgs = os.listdir(os.path.join(world_path, DIM_PATH))
     rgs = [os.path.join(os.path.join(world_path, DIM_PATH), i) for i in rgs]
@@ -24,8 +29,8 @@ def main(world_path: str, output_file_path: str, dimension: int):
         
         print(f'Started new region: {rg_name}')
         
-        for cx in range(32):
-            for cz in range(32):
+        for cx in range32:
+            for cz in range32:
                 
                 c = anvil.Chunk.from_region(rg, cx, cz)
                 if c is None:
@@ -34,9 +39,9 @@ def main(world_path: str, output_file_path: str, dimension: int):
                 
                 print(f'Processed chunk at x:{cx} z:{cz}')
 
-                for by in range(CHEIGHT):
-                    for bx in range(CWIDTH):
-                        for bz in range(CLENGTH):
+                for by in range_CHEIGHT:
+                    for bx in range_CWIDTH:
+                        for bz in range_CLENGTH:
 
                             b = c.get_block(bx, by, bz)
 
@@ -55,3 +60,4 @@ output_file_path = sys.argv[2]
 dimension = sys.argv[3]
 
 main(world_path, output_file_path, dimension)
+
