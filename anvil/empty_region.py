@@ -1,18 +1,21 @@
 from typing import Union, List, BinaryIO
+import zlib
+import math
+from io import BytesIO
+from nbt import nbt
+
 from .empty_chunk import EmptyChunk
 from .chunk import Chunk
 from .empty_section import EmptySection
 from .block import Block
 from .errors import OutOfBoundsCoordinates
-from io import BytesIO
-from nbt import nbt
-import zlib
-import math
+
 
 def from_inclusive(a, b):
     """Returns a range from a to b, including both endpoints"""
     c = int(b > a)*2-1
     return range(a, b+c, c)
+
 
 class EmptyRegion:
     """
@@ -267,3 +270,4 @@ class EmptyRegion:
             else:
                 file.write(final)
         return final
+

@@ -1,18 +1,22 @@
 from typing import List, Tuple
-from . import Block
-from .errors import OutOfBoundsCoordinates
-from nbt import nbt
 from struct import Struct
 import array
+
+from nbt import nbt
+
+from . import Block
+from .errors import OutOfBoundsCoordinates
 
 # dirty mixin to change q to Q
 def _update_fmt(self, length):
     self.fmt = Struct(f'>{length}Q')
 nbt.TAG_Long_Array.update_fmt = _update_fmt
 
+
 def bin_append(a, b, length=None):
     length = length or b.bit_length()
     return (a << length) | b
+
 
 class EmptySection:
     """
@@ -175,3 +179,4 @@ class EmptySection:
         root.tags.append(bstates)
 
         return root
+

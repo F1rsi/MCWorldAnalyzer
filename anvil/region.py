@@ -1,9 +1,12 @@
 from typing import Tuple, Union, BinaryIO
-from nbt import nbt
 import zlib
 from io import BytesIO
+
+from nbt import nbt
 import anvil
+
 from .errors import GZipChunkData
+
 
 class Region:
     """
@@ -112,3 +115,4 @@ class Region:
                 return cls(data=f.read())
         else:
             return cls(data=file.read())
+

@@ -1,12 +1,16 @@
 from typing import List, Tuple, Sequence, Iterable
+import array
+
+from nbt import nbt
+
 from . import EmptySection, Block
 from .errors import OutOfBoundsCoordinates
-import array
-from nbt import nbt
+
 
 def bin_append(a, b, length=None):
     length = length or b.bit_length()
     return (a << length) | b
+
 
 class RawSection:
     """
@@ -54,3 +58,4 @@ class RawSection:
     def save(self) -> nbt.TAG_Compound:
         """Refer to :class:`EmptySection.save()`"""
         return EmptySection.save(self)
+

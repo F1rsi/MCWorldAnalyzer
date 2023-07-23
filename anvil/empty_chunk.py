@@ -1,8 +1,11 @@
 from typing import List
+
+from nbt import nbt
+
 from .block import Block
 from .empty_section import EmptySection
 from .errors import OutOfBoundsCoordinates, EmptySectionAlreadyExists
-from nbt import nbt
+
 
 class EmptyChunk:
     """
@@ -146,3 +149,4 @@ class EmptyChunk:
         level.tags.append(sections)
         root.tags.append(level)
         return root
+

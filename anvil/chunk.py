@@ -1,9 +1,10 @@
 from typing import Union, Tuple, Generator, Optional
 from nbt import nbt
+import math
+
 from .block import Block, OldBlock
 from .region import Region
 from .errors import OutOfBoundsCoordinates, ChunkNotFound
-import math
 
 
 # This version removes block state value stretching from the storage
@@ -14,6 +15,7 @@ _VERSION_20w17a = 2529
 # where blocks went from numeric ids to namespaced ids (namespace:block_id)
 _VERSION_17w47a = 1451
 
+
 def bin_append(a, b, length=None):
     """
     Appends number a to the left of b
@@ -22,12 +24,14 @@ def bin_append(a, b, length=None):
     length = length or b.bit_length()
     return (a << length) | b
 
+
 def nibble(byte_array, index):
     value = byte_array[index // 2]
     if index % 2:
         return value >> 4
     else:
         return value & 0b1111
+
 
 class Chunk:
     """
@@ -396,3 +400,4 @@ class Chunk:
             return None # F1rsi - Dont raise useless exception.
             # raise ChunkNotFound(f'Could not find chunk ({chunk_x}, {chunk_z})')
         return cls(nbt_data)
+

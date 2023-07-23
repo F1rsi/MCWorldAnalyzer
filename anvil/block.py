@@ -2,6 +2,7 @@ from nbt import nbt
 from frozendict import frozendict
 from .legacy import LEGACY_ID_MAP
 
+
 class Block:
     """
     Represents a minecraft block.
@@ -104,6 +105,7 @@ class Block:
         name, properties = LEGACY_ID_MAP[key]
         return cls('minecraft', name, properties=properties)
 
+
 class OldBlock:
     """
     Represents a pre 1.13 minecraft block, with a numeric id.
@@ -145,3 +147,4 @@ class OldBlock:
 
     def __hash__(self):
         return hash(self.id) ^ hash(self.data)
+
