@@ -160,7 +160,7 @@ class Chunk:
                 else:
                     return OldBlock(0)
 
-            index = y * 16 * 16 + z * 16 + x
+            index = y * 256 + z * 16 + x # F1rsi - Optimize math operations.
 
             block_id = section['Blocks'][index]
             if 'Add' in section:
@@ -183,7 +183,7 @@ class Chunk:
         bits = max((len(section['Palette']) - 1).bit_length(), 4)
 
         # Get index on the block list with the order YZX
-        index = y * 16*16 + z * 16 + x
+        index = y * 256 + z * 16 + x # F1rsi - Optimize math operations.
 
         # BlockStates is an array of 64 bit numbers
         # that holds the blocks index on the palette list
@@ -204,7 +204,7 @@ class Chunk:
         # could also use ctypes.c_ulonglong(n).value but that'd require an extra import
         data = states[state]
         if data < 0:
-            data += pow(2, 64)
+            data += pow(2, 64) # F1rsi - Optimize math operations.
 
         if stretches:
             # shift the number to the right to remove the left over bits
@@ -217,7 +217,7 @@ class Chunk:
         if stretches and 64 - ((bits * index) % 64) < bits:
             data = states[state + 1]
             if data < 0:
-                data += 2**64
+                data += pow(2, 64) # F1rsi - Optimize math operations.
 
             # get how many bits are from a palette index of the next block
             leftover = (bits - ((state + 1) * 64 % bits)) % bits
@@ -314,7 +314,7 @@ class Chunk:
 
         data = states[state]
         if data < 0:
-            data += 2**64
+            data += pow(2, 64) # F1rsi - Optimize math operations.
 
         bits_mask = 2**bits - 1
 
@@ -331,7 +331,7 @@ class Chunk:
                 state += 1
                 new_data = states[state]
                 if new_data < 0:
-                    new_data += 2**64
+                    new_data += pow(2, 64) # F1rsi - Optimize math operations.
 
                 if stretches:
                     leftover = data_len
