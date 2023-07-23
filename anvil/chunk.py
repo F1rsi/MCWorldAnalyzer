@@ -78,8 +78,10 @@ class Chunk:
         anvil.OutOfBoundsCoordinates
             If Y is not in range of 0 to 15
         """
+        ''' F1rsi - Useless for MCWorldAnalyzer
         if y < 0 or y > 15:
             raise OutOfBoundsCoordinates(f'Y ({y!r}) must be in range of 0 to 15')
+        '''
 
         try:
             sections = self.data["Sections"]
@@ -202,7 +204,7 @@ class Chunk:
         # could also use ctypes.c_ulonglong(n).value but that'd require an extra import
         data = states[state]
         if data < 0:
-            data += 2**64
+            data += pow(2, 64)
 
         if stretches:
             # shift the number to the right to remove the left over bits
@@ -391,5 +393,6 @@ class Chunk:
             region = Region.from_file(region)
         nbt_data = region.chunk_data(chunk_x, chunk_z)
         if nbt_data is None:
-            raise ChunkNotFound(f'Could not find chunk ({chunk_x}, {chunk_z})')
+            return None # F1rsi - Dont raise useless exception.
+            # raise ChunkNotFound(f'Could not find chunk ({chunk_x}, {chunk_z})')
         return cls(nbt_data)
