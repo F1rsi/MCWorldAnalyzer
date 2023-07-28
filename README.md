@@ -1,7 +1,6 @@
 # MCWorldAnalyzer
 
-usage: python3 main.py <world_path> <path_for_result> <dimension>
-
+usage: python3 main.py world_path path_for_result dimension
 
 world_path: string
 
