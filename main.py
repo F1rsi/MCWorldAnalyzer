@@ -1,4 +1,7 @@
-import sys, os, json
+import sys
+import os
+import json
+import time
 
 import anvil
 
@@ -34,34 +37,37 @@ def main(world_path: str, output_dir_path: str, dimension: int):
     rgs = [i for i in rgs if i not in rgs_processed]
 
     for rg_name in rgs:
+        time_begin = time.time()
+
         rg = anvil.Region.from_file(os.path.join(os.path.join(world_path, DIM_PATH), rg_name))
         rg_result = b_map
+
+        c_processed = 0
 
         print(f'Started new region: {rg_name}')
 
         for cx in range_RGSIZE:
             for cz in range_RGSIZE:
 
+                c_processed += 1
                 c = anvil.Chunk.from_region(rg, cx, cz)
                 if c is None:
                     print(f'Skiped chunk at x:{cx} z:{cz}')
                     continue
 
-                print(f'Processed chunk at x:{cx} z:{cz}')
+                print(f'\rProcessed chunk at x:{cx} z:{cz}; Progress: {c_processed / 1024 * 100}%', end='')
 
                 for by in range_CHEIGHT:
                     for bx in range_CWIDTH:
                         for bz in range_CLENGTH:
 
                             b = c.get_block(bx, by, bz)
+                            rg_result[b.id][b.data] += 1
 
-                            try:
-                                rg_result[b.id][b.data] += 1
-                            except IndexError:
-                                print(f'KeyError: {b.data} for {b.id}')
-                                exit()
+        time_end = time.time()
 
-        print(f'Save result data for "{rg_name}"')
+        print(f'\nSave result data for "{rg_name}"')
+        print(f'Time elapsed: {int(time_end - time_begin)}s')
 
         with open(os.path.join(output_dir_path, os.path.splitext(rg_name)[0] + '.json'), 'w') as f:
             json.dump(rg_result, f, indent=3)
