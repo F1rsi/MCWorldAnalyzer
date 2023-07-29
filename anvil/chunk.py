@@ -387,14 +387,9 @@ class Chunk:
         ----------
         region
             Either a :class:`anvil.Region` or a region file name (like ``r.0.0.mca``)
-
-        Raises
-        ----------
-        anvil.ChunkNotFound
-            If a chunk is outside this region or hasn't been generated yet
         """
         if isinstance(region, str):
-            region = Region.from_file(region)
+            region = Region(region)
         nbt_data = region.chunk_data(chunk_x, chunk_z)
         if nbt_data is None:
             return None # F1rsi - Dont raise useless exception.

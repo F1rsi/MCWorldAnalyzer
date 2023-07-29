@@ -39,7 +39,9 @@ def main(world_path: str, output_dir_path: str, dimension: int):
     for rg_name in rgs:
         time_begin = time.time()
 
-        rg = anvil.Region.from_file(os.path.join(os.path.join(world_path, DIM_PATH), rg_name))
+        rg = anvil.Region(os.path.join(os.path.join(world_path, DIM_PATH), rg_name))
+        #if anvil.utils.get_chunk_count_from_rg()
+
         rg_result = b_map
 
         c_processed = 0
@@ -55,7 +57,7 @@ def main(world_path: str, output_dir_path: str, dimension: int):
                     print(f'Skiped chunk at x:{cx} z:{cz}')
                     continue
 
-                print(f'\rProcessed chunk at x:{cx} z:{cz}; Progress: {c_processed / 1024 * 100}%', end='')
+                print(f'\rProcessed chunk at x:{cx} z:{cz}; Progress: {c_processed / 1024 * 100}%\t', end='')
 
                 for by in range_CHEIGHT:
                     for bx in range_CWIDTH:

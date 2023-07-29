@@ -14,13 +14,16 @@ class Region:
 
     Attributes
     ----------
+    name: :class:`str`
+        Region file (``.mca``) as string.
     data: :class:`bytes`
-        Region file (``.mca``) as bytes
+        Region file data.
     """
-    __slots__ = ('data',)
-    def __init__(self, data: bytes):
-        """Makes a Region object from data, which is the region file content"""
-        self.data = data
+    __slots__ = ('name', 'data',)
+    def __init__(self, name: str):
+        """Makes a Region object from name."""
+        self.name = name
+        self.data = open(name, 'rb').read()
 
     @staticmethod
     def header_offset(chunk_x: int, chunk_z: int) -> int:
@@ -99,20 +102,3 @@ class Region:
         :rtype: :class:`anvil.Chunk`
         """
         return anvil.Chunk.from_region(self, chunk_x, chunk_z)
-
-    @classmethod
-    def from_file(cls, file: Union[str, BinaryIO]):
-        """
-        Creates a new region with the data from reading the given file
-
-        Parameters
-        ----------
-        file
-            Either a file path or a file object
-        """
-        if isinstance(file, str):
-            with open(file, 'rb') as f:
-                return cls(data=f.read())
-        else:
-            return cls(data=file.read())
-
