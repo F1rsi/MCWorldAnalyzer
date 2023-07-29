@@ -80,3 +80,7 @@ output_dir_path = sys.argv[2]
 dimension = sys.argv[3]
 
 main(world_path, output_dir_path, dimension)
+
+
+
+
