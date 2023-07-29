@@ -55,17 +55,24 @@ class Chunk:
     __slots__ = ('version', 'data', 'x', 'z', 'tile_entities')
 
     def __init__(self, nbt_data: nbt.NBTFile):
-        try:
-            self.version = nbt_data['DataVersion'].value
-        except KeyError:
-            # Version is pre-1.9 snapshot 15w32a, so world does not have a Data Version.
-            # See https://minecraft.fandom.com/wiki/Data_version
-            self.version = None
+        self.data = None
+        self.x = None
+        self.z = None
+        self.tile_entities = None
+        self.version = None
 
-        self.data = nbt_data['Level']
-        self.x = self.data['xPos'].value
-        self.z = self.data['zPos'].value
-        self.tile_entities = self.data['TileEntities']
+        if nbt_data is not None:
+            try:
+                self.version = nbt_data['DataVersion'].value
+            except KeyError:
+                # Version is pre-1.9 snapshot 15w32a, so world does not have a Data Version.
+                # See https://minecraft.fandom.com/wiki/Data_version
+                self.version = None
+
+            self.data = nbt_data['Level']
+            self.x = self.data['xPos'].value
+            self.z = self.data['zPos'].value
+            self.tile_entities = self.data['TileEntities']
 
     def get_section(self, y: int) -> nbt.TAG_Compound:
         """
@@ -377,22 +384,3 @@ class Chunk:
             t_x, t_y, t_z = [tile_entity[k].value for k in 'xyz']
             if x == t_x and y == t_y and z == t_z:
                 return tile_entity
-
-    @classmethod
-    def from_region(cls, region: Union[str, Region], chunk_x: int, chunk_z: int):
-        """
-        Creates a new chunk from region and the chunk's X and Z
-
-        Parameters
-        ----------
-        region
-            Either a :class:`anvil.Region` or a region file name (like ``r.0.0.mca``)
-        """
-        if isinstance(region, str):
-            region = Region(region)
-        nbt_data = region.chunk_data(chunk_x, chunk_z)
-        if nbt_data is None:
-            return None # F1rsi - Dont raise useless exception.
-            # raise ChunkNotFound(f'Could not find chunk ({chunk_x}, {chunk_z})')
-        return cls(nbt_data)
-

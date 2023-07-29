@@ -18,12 +18,15 @@ class Region:
         Region file (``.mca``) as string.
     data: :class:`bytes`
         Region file data.
+    chunks: :class:`list`
+        List of chunks.
     """
-    __slots__ = ('name', 'data',)
+    __slots__ = ('name', 'data', 'chunks',)
     def __init__(self, name: str):
         """Makes a Region object from name."""
         self.name = name
         self.data = open(name, 'rb').read()
+        self.chunks = []
 
     @staticmethod
     def header_offset(chunk_x: int, chunk_z: int) -> int:
@@ -101,4 +104,9 @@ class Region:
         
         :rtype: :class:`anvil.Chunk`
         """
-        return anvil.Chunk.from_region(self, chunk_x, chunk_z)
+        return anvil.Chunk(self.chunk_data(chunk_x, chunk_z))
+
+    def load(self) -> None:
+        for cx in range(32):
+            for cz in range(32):
+                self.chunks.append(self.get_chunk(cx, cz))
